@@ -1,0 +1,5 @@
+Contact: https://tallyridge-assurance-2.vercel.app/security/
+Canonical: https://tallyridge-assurance-2.vercel.app/.well-known/security.txt
+Policy: https://tallyridge-assurance-2.vercel.app/security/
+Expires: 2027-10-01T00:00:00.000Z
+Preferred-Languages: en
