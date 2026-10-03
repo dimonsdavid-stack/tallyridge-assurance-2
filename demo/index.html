@@ -1,54 +1,7 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Synthetic Assurance Demo | Tallyridge Assurance</title>
-  <meta name="description" content="Synthetic demonstration of Tallyridge Assurance exception classification and evidence workflows." />
-  <link rel="stylesheet" href="/styles.css" />
-</head>
-<body>
-  <header class="site-header">
-    <a class="brand" href="/"><span class="brand-mark">TA</span><span><strong>Tallyridge</strong><small>Assurance</small></span></a>
-    <nav><a href="/">Home</a><a href="/baseline/">Baseline</a><a class="active" href="/demo/">Demo</a><a href="/security/">Security</a></nav>
-    <a class="button button-small" href="/data/demo-findings.csv" download>Download CSV</a>
-  </header>
-  <main class="section demo-page">
-    <div class="eyebrow">SYNTHETIC DEMONSTRATION</div>
-    <div class="demo-title-row"><div><h1>Impact Fee Assurance Review</h1><p>Illustrative records only. No real agency, permit, developer, or financial data is represented.</p></div><span class="status-badge">SYNTHETIC DATA</span></div>
-
-    <div class="kpi-grid">
-      <div class="kpi"><span>Records tested</span><strong>2,418</strong><small>24-month sample</small></div>
-      <div class="kpi"><span>Confirmed discrepancies</span><strong>18</strong><small>0.74% of records</small></div>
-      <div class="kpi"><span>Potential discrepancies</span><strong>31</strong><small>Requires disposition</small></div>
-      <div class="kpi"><span>No exception</span><strong>2,344</strong><small>96.94% of records</small></div>
-    </div>
-
-    <section class="panel demo-panel">
-      <div class="table-toolbar">
-        <div><h2>Finding register</h2><p>Each finding shows an exception class, evidence status, and required review gate.</p></div>
-        <label>Filter <select id="finding-filter"><option value="all">All findings</option><option value="confirmed">Confirmed discrepancy</option><option value="potential">Potential discrepancy</option><option value="refund">Overcollection / refund candidate</option><option value="accounting">Accounting exception</option></select></label>
-      </div>
-      <div class="table-wrap">
-        <table id="finding-table">
-          <thead><tr><th>Record</th><th>Exception class</th><th>Observed condition</th><th>Evidence</th><th>Review gate</th></tr></thead>
-          <tbody>
-            <tr data-type="confirmed"><td>DIF-2026-0184</td><td><span class="pill confirmed">Confirmed discrepancy</span></td><td>Expected transportation fee differs from assessed amount after historical rate reconstruction.</td><td>Rule + permit + assessment</td><td>Finance / Legal</td></tr>
-            <tr data-type="potential"><td>DIF-2026-0712</td><td><span class="pill potential">Potential discrepancy</span></td><td>Credit appears to exceed the indexed balance available in the source agreement.</td><td>Agreement + ledger</td><td>Legal / Planning</td></tr>
-            <tr data-type="refund"><td>DIF-2026-0931</td><td><span class="pill refund">Refund candidate</span></td><td>Fee appears assessed under a rate version later than the documented vesting date.</td><td>Permit + rule chronology</td><td>Legal</td></tr>
-            <tr data-type="accounting"><td>DIF-2026-1044</td><td><span class="pill accounting">Accounting exception</span></td><td>Cash receipt is present but matching restricted-fund posting is not located in the imported ledger population.</td><td>Receipt + ERP extract</td><td>Finance</td></tr>
-            <tr data-type="potential"><td>DIF-2026-1390</td><td><span class="pill potential">Potential discrepancy</span></td><td>Exemption code is present without the supporting source record in the evidence package.</td><td>Assessment only</td><td>Planning / Legal</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section class="grid-2 demo-lower">
-      <div class="panel compact"><div class="eyebrow">EVIDENCE STANDARD</div><h2>Reproducible finding packet</h2><ul class="checklist"><li>Source records and provenance</li><li>Applicable rule version and effective date</li><li>Formula and normalized inputs</li><li>Expected vs. actual values</li><li>Assumptions and unresolved evidence gaps</li><li>Required human disposition</li></ul></div>
-      <div class="panel compact"><div class="eyebrow">CONTROL PRINCIPLE</div><h2>No autonomous financial disposition.</h2><p>Tallyridge can surface and classify anomalies. Final decisions involving collectibility, refunds, exemptions, legal authority, accounting corrections, or restricted use remain with authorized agency personnel and counsel.</p><a class="button button-ghost" href="/data/demo-findings.csv" download>Export synthetic findings</a></div>
-    </section>
-  </main>
-  <footer><p>Tallyridge Assurance · Synthetic product demonstration</p><p class="fine">Illustrative content only.</p></footer>
-  <script src="/app.js"></script>
-</body>
-</html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Synthetic Assurance Review — Tallyridge Assurance</title><meta name="description" content="Synthetic demonstration of Tallyridge Assurance finding classification, reconciliation evidence, and reviewer gates."><meta name="theme-color" content="#071525"><link rel="canonical" href="https://tallyridge-assurance-2.vercel.app/demo/"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/styles.css"></head><body><a class="skip-link" href="#main">Skip to content</a>
+<header class="topbar"><div class="wrap"><a class="brand" href="/"><span class="mark">TA</span><span class="brand-text"><strong>Tallyridge</strong><small>Assurance</small></span></a><nav class="site-nav"><a href="/">Product</a><a href="/baseline/">Baseline</a><a class="active" href="/demo/">Live Demo</a><a href="/security/">Security</a><a href="/trust/">Trust</a></nav><div class="statusline"><span class="dot"></span><span class="label-status">SYNTHETIC DATA ONLY</span></div></div></header>
+<main id="main"><section class="page-hero"><div class="wrap page-head-row"><div><div class="eyebrow">GOVERNED DEMONSTRATION</div><h1>Impact Fee Assurance Review</h1><p class="lede">A synthetic, evidence-labeled view of how Tallyridge surfaces exceptions without pretending an anomaly is automatically collectible, refundable, or legally final.</p></div><span class="page-badge">NO REAL AGENCY DATA</span></div></section>
+<section class="section white"><div class="wrap"><div class="metric-grid"><div class="metric"><span>Records tested</span><strong>2,418</strong></div><div class="metric"><span>Confirmed discrepancies</span><strong>18</strong></div><div class="metric"><span>Potential findings</span><strong>31</strong></div><div class="metric"><span>No exception</span><strong>2,344</strong></div></div><div class="table-toolbar"><div><div class="eyebrow accent">Finding register</div><h2 class="mt8">Evidence before disposition.</h2><p>Filter the synthetic register to inspect how classifications remain separate from final agency action.</p></div><label class="field m0"><span class="label">Filter</span><select id="finding-filter"><option value="all">All findings</option><option value="confirmed">Confirmed discrepancy</option><option value="potential">Potential discrepancy</option><option value="refund">Overcollection / refund candidate</option><option value="accounting">Accounting exception</option></select></label></div><div class="table-wrap"><table id="finding-table"><thead><tr><th>Record</th><th>Exception class</th><th>Observed condition</th><th>Evidence</th><th>Review gate</th></tr></thead><tbody><tr data-type="confirmed"><td>DIF-2026-0184</td><td><span class="pill confirmed">Confirmed discrepancy</span></td><td>Expected transportation fee differs from assessed amount after historical rate reconstruction.</td><td>Rule + permit + assessment</td><td>Finance / Legal</td></tr><tr data-type="potential"><td>DIF-2026-0712</td><td><span class="pill potential">Potential discrepancy</span></td><td>Credit appears to exceed the indexed balance available in the source agreement.</td><td>Agreement + ledger</td><td>Legal / Planning</td></tr><tr data-type="refund"><td>DIF-2026-0931</td><td><span class="pill refund">Refund candidate</span></td><td>Fee appears assessed under a rate version later than the documented vesting date.</td><td>Permit + rule chronology</td><td>Legal</td></tr><tr data-type="accounting"><td>DIF-2026-1044</td><td><span class="pill accounting">Accounting exception</span></td><td>Cash receipt is present but matching restricted-fund posting is not located in the imported ledger population.</td><td>Receipt + ERP extract</td><td>Finance</td></tr><tr data-type="potential"><td>DIF-2026-1390</td><td><span class="pill potential">Potential discrepancy</span></td><td>Exemption code is present without the supporting source record in the evidence package.</td><td>Assessment only</td><td>Planning / Legal</td></tr></tbody></table></div><div class="actions"><a class="button light" href="/data/demo-findings.csv" download>Download synthetic CSV</a><a class="button ghost" href="/baseline/">Inspect baseline workflow</a></div></div></section>
+<section class="section"><div class="wrap two-col"><article class="card"><div class="eyebrow accent">Evidence standard</div><h2>Every finding must be reproducible.</h2><ul class="checklist"><li>Source records and provenance</li><li>Applicable rule version and effective date</li><li>Formula and normalized inputs</li><li>Expected vs. actual values</li><li>Assumptions and unresolved evidence gaps</li><li>Required human disposition</li></ul></article><article class="card"><div class="eyebrow accent">Control principle</div><h2>No autonomous financial disposition.</h2><p>Final decisions involving collectibility, refunds, exemptions, legal authority, accounting corrections, or restricted use remain with authorized agency personnel and counsel.</p><div class="callout">This demonstration is deliberately synthetic so the public surface can be inspected without exposing production municipal data or credentials.</div></article></div></section>
+<section class="section dark-section"><div class="wrap split"><div><div class="eyebrow">From demo to evidence population</div><h2>Test whether your records can support this level of proof.</h2><p class="lede small">The readiness scan evaluates the control chain without asking for municipal data.</p><a class="button" href="/scan/">Run readiness scan →</a></div><div class="score-card"><div class="score-ring"><strong>0</strong><span>PII</span></div><div><div class="label">PUBLIC DEMO DATA</div><h3>Fully synthetic by design.</h3><p>No real agency, permit, developer, payment, or accounting record is represented on this page.</p></div></div></div></section></main>
+<footer class="footer"><div class="wrap"><div><div class="brand"><span class="mark">TA</span><span class="brand-text"><strong>Tallyridge</strong><small>Assurance</small></span></div><p class="fine">Synthetic product demonstration only.</p></div><nav class="footer-links"><a href="/">Home</a><a href="/baseline/">Baseline</a><a href="/security/">Security</a><a href="/trust/">Trust</a></nav></div></footer><script src="/app.js" defer></script></body></html>
