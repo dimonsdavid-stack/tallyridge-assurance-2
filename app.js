@@ -36,11 +36,11 @@
         if (value !== 'yes') priorities.push(node.dataset.priority);
       });
       const score = Math.round((total / questions.length) * 100);
-      let band = 'Control gaps identified';
-      if (score >= 85) band = 'Strong baseline posture';
-      else if (score >= 65) band = 'Material assurance opportunity';
-      else if (score >= 40) band = 'High reconciliation exposure';
-      else band = 'Foundational control gap';
+      let band = 'Records need preparation';
+      if (score >= 85) band = 'Records appear ready';
+      else if (score >= 65) band = 'Some records need follow-up';
+      else if (score >= 40) band = 'Several records need follow-up';
+      else band = 'Records need preparation';
       q('#scan-score').textContent = String(score);
       q('#scan-band').textContent = band;
       const list = q('#scan-priorities');
@@ -67,23 +67,23 @@
       let readiness = '';
       try { readiness = sessionStorage.getItem('tallyridge_readiness_score') || ''; } catch (_) {}
       return [
-        'TALLYRIDGE ASSURANCE — IMPACT FEE ASSURANCE BASELINE REQUEST',
+        'TALLYRIDGE ASSURANCE — DEVELOPMENT FEE REVIEW REQUEST',
         '',
-        `Agency / organization: ${fields.agency || 'Not provided'}`,
-        `Role / function: ${fields.role || 'Not provided'}`,
+        `Agency: ${fields.agency || 'Not provided'}`,
+        `Department / office: ${fields.role || 'Not provided'}`,
         `Jurisdiction / state: ${fields.jurisdiction || 'Not provided'}`,
-        `Primary permitting / revenue systems: ${fields.systems || 'Not provided'}`,
-        `Priority assurance scope: ${fields.scope || 'Not provided'}`,
-        `Desired timing: ${fields.timing || 'Not provided'}`,
-        readiness ? `Readiness scan score: ${readiness}/100` : 'Readiness scan score: Not completed',
+        `Records available: ${fields.systems || 'Not provided'}`,
+        `Primary review area: ${fields.scope || 'Not provided'}`,
+        `Desired review period: ${fields.timing || 'Not provided'}`,
+        readiness ? `Records readiness checklist: ${readiness}/100` : 'Readiness scan score: Not completed',
         '',
-        'Context / known issues:',
+        'Reason for review:',
         fields.context || 'Not provided',
         '',
-        'Requested next step:',
-        'Review the authority → assessment → collection → ledger → restricted-fund evidence population and determine a bounded baseline scope.',
+        'Requested review:',
+        'Review the selected development fee records and prepare findings for agency staff review.',
         '',
-        'Generated locally by tallyridge-assurance-2.vercel.app. No form data was transmitted by this page.'
+        'Prepared at tallyridge-assurance-2.vercel.app. Information entered on this page was not submitted.'
       ].join('\n');
     };
     requestForm.addEventListener('submit', (event) => {
