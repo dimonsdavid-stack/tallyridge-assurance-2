@@ -1,0 +1,6 @@
+record_id,exception_class,observed_condition,evidence,review_gate,synthetic
+DIF-2026-0184,Confirmed discrepancy,"Expected transportation fee differs from assessed amount after historical rate reconstruction.","Rule + permit + assessment","Finance / Legal",true
+DIF-2026-0712,Potential discrepancy,"Credit appears to exceed the indexed balance available in the source agreement.","Agreement + ledger","Legal / Planning",true
+DIF-2026-0931,Overcollection / refund candidate,"Fee appears assessed under a rate version later than the documented vesting date.","Permit + rule chronology","Legal",true
+DIF-2026-1044,Accounting exception,"Cash receipt is present but matching restricted-fund posting is not located in the imported ledger population.","Receipt + ERP extract","Finance",true
+DIF-2026-1390,Potential discrepancy,"Exemption code is present without the supporting source record in the evidence package.","Assessment only","Planning / Legal",true
