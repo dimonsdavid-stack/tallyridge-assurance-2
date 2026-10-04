@@ -1,5 +1,7 @@
-.vercel
-.DS_Store
-.env
-.env.*
-node_modules
+node_modules/
+.env*
+.vercel/
+test-results/
+playwright-report/
+assets/
+dist/

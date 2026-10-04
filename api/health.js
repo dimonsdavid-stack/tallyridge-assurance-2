@@ -1,11 +1,1 @@
-export default function handler(request, response) {
-  response.setHeader('Cache-Control', 'no-store, max-age=0');
-  response.status(200).json({
-    ok: true,
-    service: 'tallyridge-assurance',
-    version: '2.0.0',
-    surface: 'public-gtm',
-    dataMode: 'synthetic-only',
-    productionDataPlane: false
-  });
-}
+export default function handler(request,response){response.setHeader('Cache-Control','no-store');response.status(200).json({ok:true,service:'civicreconcile',version:'3.0.0',surface:'public-tools-and-intake',readiness:'browser-local-pdf',reconciliation:'browser-local-csv',intakeConfigured:Boolean(process.env.BLOB_READ_WRITE_TOKEN),productionMunicipalDataPlane:false});}

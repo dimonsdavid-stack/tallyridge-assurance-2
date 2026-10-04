@@ -1,0 +1,15 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {parseCSV,reconcile,cents,resultsCSV} from '../lib/reconciliation.js';
+import {analyzeDocuments} from '../lib/readiness.js';
+const rule={fee_code:'T',effective_from:'2025-01-01',effective_to:'2026-01-01',unit_rate:'1.25',expected_fund:'240'};
+const record={record_id:'A',assessment_date:'2025-07-01',fee_code:'T',quantity:'2',assessed:'2.50',collected:'2.50',credit:'0.00',posted_fund:'240'};
+test('CSV escaped commas, quotes, CRLF and BOM',()=>assert.deepEqual(parseCSV('\uFEFFid,note\r\n1,"a,b"\r\n2,"a""b"'),[{id:'1',note:'a,b'},{id:'2',note:'a"b'}]));
+test('malformed rows rejected',()=>{assert.throws(()=>parseCSV('id,id\n1,2'));assert.throws(()=>parseCSV('id,n\n1'));assert.throws(()=>parseCSV('id\n"a'));});
+test('exact integer cents and fractional quantity',()=>{assert.equal(cents('0.10'),10n);assert.equal(reconcile([{...record,quantity:'0.5',assessed:'0.63',collected:'0.63'}],[rule])[0].expected,'0.63');});
+test('matching record has no supplied-field exception',()=>assert.equal(reconcile([record],[rule])[0].status,'NO_EXCEPTION_IN_SUPPLIED_FIELDS'));
+test('schedule endpoints and overlap fail closed',()=>{assert.equal(reconcile([{...record,assessment_date:'2026-01-01'}],[rule])[0].status,'NOT_EVALUATED');assert.equal(reconcile([record],[rule,rule])[0].status,'NOT_EVALUATED');});
+test('duplicates and unsupported authority excluded',()=>assert.ok(reconcile([record,record],[rule]).every(r=>r.status==='NOT_EVALUATED')));
+test('credit overflow and invalid money excluded',()=>{assert.equal(reconcile([{...record,credit:'5.00'}],[rule])[0].status,'NOT_EVALUATED');assert.equal(reconcile([{...record,assessed:'1e2'}],[rule])[0].status,'NOT_EVALUATED');});
+test('fund mismatch is review, not recovered revenue',()=>{const r=reconcile([{...record,posted_fund:'999'}],[rule])[0];assert.equal(r.status,'REVIEW');assert.equal(r.collectionDifference,'0.00');});
+test('CSV formula injection escaped',()=>assert.ok(resultsCSV([{...reconcile([record],[rule])[0],recordId:'=HYPERLINK("x")'}]).includes("'=HYPERLINK")));
+test('public-document terms never become compliance verdicts',()=>{const r=analyzeDocuments([{kind:'ACFR',pages:[{page:1,text:'Capital projects restricted fund'}]}]);assert.equal(r.find(x=>x.id==='funds').status,'CONTEXT_LOCATED');assert.equal(r.find(x=>x.id==='authority').status,'NOT_LOCATED_IN_SUPPLIED_TEXT');});

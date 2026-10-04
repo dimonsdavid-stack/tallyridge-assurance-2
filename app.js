@@ -67,7 +67,7 @@
       let readiness = '';
       try { readiness = sessionStorage.getItem('tallyridge_readiness_score') || ''; } catch (_) {}
       return [
-        'TALLYRIDGE ASSURANCE — DEVELOPMENT FEE REVIEW REQUEST',
+        'CIVICRECONCILE — DEVELOPMENT FEE REVIEW REQUEST',
         '',
         `Agency: ${fields.agency || 'Not provided'}`,
         `Department / office: ${fields.role || 'Not provided'}`,
@@ -83,7 +83,7 @@
         'Requested review:',
         'Review the selected development fee records and prepare findings for agency staff review.',
         '',
-        'Prepared at tallyridge-assurance-2.vercel.app. Information entered on this page was not submitted.'
+        'Prepared at tallyridge-assurance-2.vercel.app. This downloaded brief is local. Submission occurs only when you choose Submit Review Request.'
       ].join('\n');
     };
     requestForm.addEventListener('submit', (event) => {
@@ -120,4 +120,22 @@
       success.classList.add('visible');
     });
   }
+})();
+
+(() => {
+ const form=document.querySelector('#baseline-request-form'),button=document.querySelector('#submit-request');
+ if(!form||!button)return;
+ const started=Date.now();let requestId=crypto.randomUUID();
+ form.addEventListener('input',()=>{requestId=crypto.randomUUID();});
+ button.addEventListener('click',async()=>{
+  const status=document.querySelector('#request-status');
+  if(!form.reportValidity())return;
+  if(!document.querySelector('#request-consent').checked){status.textContent='Confirm contact-use consent to submit; you can still download your internal brief.';return;}
+  const fields=Object.fromEntries(new FormData(form));
+  const payload={...fields,consent:true,requestId,elapsedMs:Date.now()-started};
+  button.disabled=true;status.textContent='Saving your request…';
+  try{const response=await fetch('/api/intake',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const data=await response.json();if(!response.ok)throw new Error(data.error||'Request unavailable');status.textContent=`Request saved. Receipt: ${data.requestId}. This is an evaluation request, not an order. Keep the receipt for follow-up.`;}
+  catch(error){status.textContent=error.message;}
+  finally{button.disabled=false;}
+ });
 })();
